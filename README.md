@@ -103,10 +103,10 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 
 **Example Prompts:**
 - `List all Airflow DAGs`
-- `Get details for dag_id=my_etl_pipeline`
+- `Get details for dag_id example_bash_operator`
 - `Show all workflow assets`
 - `Trigger the daily_report DAG`
-- `What is the status of the data_ingestion DAG?`
+- `What is the status of the example_bash_operator DAG?`
 
 **How it works:**
 - Claude Desktop sends your prompt to the MCP server.
