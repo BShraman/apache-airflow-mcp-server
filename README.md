@@ -16,7 +16,7 @@ The **Apache Airflow MCP Server** enables users to orchestrate and manage Airflo
 
 ## 🛠 Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop)
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) - All-in-one container runtime for building and running Dockerized apps
 - [Docker Compose](https://docs.docker.com/compose/) – for managing multi-container apps
 - [Claude Desktop](https://claude.ai/)  – for local LLM interaction
 - (Optional) Python 3.10+ for local development
