@@ -59,8 +59,7 @@ Edit the MCP Config with
 ## Using in Claude Desktop
 
 - **Tools**: Auto-listed in Claude Desktop and ready to invoke.
-
-Example prompts you might register:
+- **Example Prompts**:
 - `list all airflow dags`
 - `get dag details for {dag_id}`
 - `list all assets`
