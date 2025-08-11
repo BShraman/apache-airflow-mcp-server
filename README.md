@@ -28,8 +28,8 @@ The **Apache Airflow MCP Server** enables users to orchestrate and manage Airflo
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/airflow-mcp-server.git
-cd airflow-mcp-server
+git clone https://github.com/BShraman/apache-airflow-mcp-server.git
+cd apache-airflow-mcp-server
 ```
 
 ### 2. Build the Docker Image
