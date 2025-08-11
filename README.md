@@ -127,7 +127,7 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 
 - **Claude Desktop can't find MCP tools:** Ensure the MCP server is running and correctly configured.
 - **Authentication errors:** Check your Airflow credentials in the `.env` file.
-- **Docker issues:** Use `docker logs airflow-mcp-server` to view error messages.
+- **Docker issues:** Use `docker logs` to view error messages.
 
 ---
 ## 📚 Resources
