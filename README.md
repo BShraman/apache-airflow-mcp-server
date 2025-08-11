@@ -124,6 +124,15 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 - **Security:** Use dedicated Airflow credentials and restrict network access as needed.
 
 ---
+## Testing
+![MCP Server Tools](docs/tools.png)
+![List Dags](docs/list_dags.png)
+![Trigger Dags](docs/trigger_dags.png)
+![Running Dags](docs/running_dags.png)
+![Delete Dags](docs/delete_dags.png)
+
+
+---
 
 ## 📝 Troubleshooting
 
