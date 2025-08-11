@@ -69,16 +69,18 @@ To connect Claude Desktop to your MCP server, follow these steps:
 - Insert the following block (update the image name if needed):
 
 ```json
-"mcpServers": {
-    "airflow-mcp-server": {
-        "command": "docker",
-        "args": [
-            "run",
-            "-i",
-            "--rm",
-            "airflow-mcp-server"
-        ]
+{
+  "mcpServers": {
+    "airflow-custom-mcp": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "airflow-custom-mcp"
+      ]
     }
+  }
 }
 ```
 
