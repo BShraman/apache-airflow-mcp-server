@@ -1,0 +1,40 @@
+psycopg2-binary==2.9.10
+# dotenv-python==0.0.1 #for Local development
+python-dotenv==1.1.1  #For docker build
+mcp==1.12.2
+requests==2.32.4
+httpx==0.28.1
+uvicorn==0.35.0
+mcp[cli]
+
+# ENDPOINT_URL="http://localhost:8080"
+# curl -X POST ${ENDPOINT_URL}/auth/token \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#     "username": "airflow",
+#     "password": "airflow"
+#   }'
+
+
+# curl -X GET ${ENDPOINT_URL}/api/v2/assets \
+#   -H "Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaXNzIjpbXSwiYXVkIjoiYXBhY2hlLWFpcmZsb3ciLCJuYmYiOjE3NTQwMTA1OTgsImV4cCI6MTc1NDA5Njk5OCwiaWF0IjoxNzU0MDEwNTk4fQ.ZI_bF1XD8x5SIEdjoXrPda2DdREpQj5Y5jvE8o9UcjaFF0TE2kPAbfGsmVFtrEPsBPvw_Om9TNZSFJDc1IcCZQ"
+
+# npx @modelcontextprotocol/inspector uv run mcp/server.py
+
+# uv add -r requirements.txt
+
+# uv run mcp install server/main.py
+
+# {
+#   "mcpServers": {
+#     "Airflow MCP Server": {
+#       "command": "uv",
+#       "args": [
+#         "--directory",
+#         "/Users/shraman/Projects/mcp-srv/mcp-airflow",
+#         "run",
+#         "server/main.py"
+#       ]
+#     }
+#   }
+# }
