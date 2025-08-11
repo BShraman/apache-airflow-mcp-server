@@ -131,7 +131,6 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 ![Running Dags](docs/running_dags.png)
 ![Delete Dags](docs/delete_dags.png)
 
-
 ---
 
 ## 📝 Troubleshooting
