@@ -1,6 +1,6 @@
 # Apache Airflow MCP Server
 
-This project is an **Apache Airflow MCP (Model Context Protocol) Server** that allows you to interact with Airflow DAGs, assets, and management tools via [Claude Desktop](https://claude.ai/) or other MCP-compatible clients.
+This project is an **Apache Airflow MCP (Model Context Protocol) Server** that allows users to interact with Airflow DAGs, assets, and management tools via [Claude Desktop](https://claude.ai/) or other MCP-compatible clients.
 
 The MCP server runs inside a **local Docker container** and exposes registered tools for interacting with Airflow’s REST API.
 
