@@ -65,20 +65,20 @@ To connect Claude Desktop to your MCP server, follow these steps:
 - Click on **Edit Config** to open the configuration file in the built-in editor.
 
 5. **Add MCP Server Entry**
-- In the configuration file, locate the `"mcpServers"` section. If it does not exist, add it at the root level.
+- In the configuration file, locate the `"claude_desktop_config.json"` file.
 - Insert the following block (update the image name if needed):
 
 ```json
 "mcpServers": {
-"airflow-mcp-server": {
-"command": "docker",
-"args": [
-"run",
-"-i",
-"--rm",
-"airflow-mcp-server"
-]
-}
+    "airflow-mcp-server": {
+        "command": "docker",
+        "args": [
+            "run",
+            "-i",
+            "--rm",
+            "airflow-mcp-server"
+        ]
+    }
 }
 ```
 
