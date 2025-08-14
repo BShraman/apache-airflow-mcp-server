@@ -49,7 +49,8 @@ docker-compose up -d
 
 Open [http://localhost:8080](http://localhost:8080) in your browser.
 
-### 5. Configure Claude Desktop
+### 5. Configuration 
+#### Claude Desktop
 
 To connect Claude Desktop to your MCP server, follow these steps:
 
@@ -84,21 +85,56 @@ To connect Claude Desktop to your MCP server, follow these steps:
   }
 }
 ```
-
 6. **Save Changes**
 - Click **Save** to apply your changes.
 
 7. **Restart Claude Desktop**
 - Restart Claude Desktop to ensure the new MCP server configuration is loaded.
 
-**Tip:**
-If you need to pass environment variables or use a custom Docker image, adjust the `"args"` array accordingly.
-
 For more details, refer to the [Claude Desktop documentation](https://claude.ai/docs).
+
+#### Visual Studio Code
+
+To connect Visual Studio Code to your MCP server, follow these steps:
+
+1. **Create the MCP Configuration File**
+
+  - In your project root, create a file named `.vscode/mcp.json`.
+
+2. **Add MCP Server Configuration**
+
+  - Open `mcp.json` and add the following configuration (update the image name or command if needed):
+
+  ```json
+  {
+    "mcpServers": {
+     "airflow-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "airflow-mcp-server"
+      ]
+     }
+    }
+  }
+  ```
+3. **Save the Configuration**
+  - Save the `mcp.json` file in your project directory.
+4. **Restart Visual Studio Code**
+  - Close and reopen Visual Studio Code to ensure the new MCP configuration is loaded.
+
+5. **Verify MCP Server Connection**
+  - Use the command palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) to search for MCP-related commands.
+  - You should now be able to interact with the MCP server from within Visual Studio Code.
+
+**Tip:**  
+If you need to pass environment variables or use a custom Docker image, adjust the `"args"` array in your `.json` accordingly.
 
 ---
 
-## 💬 Using MCP with Claude Desktop
+## 💬 Using MCP with Claude Desktop or Visual Studio Code
 
 Once connected, you can list all available Airflow tools directly in Claude Desktop by entering a prompt such as `List available MCP tools`. Claude Desktop will display the registered tools and their descriptions.
 
@@ -112,9 +148,9 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 - `What is the status of the example_bash_operator DAG?`
 
 **How it works:**
-- Claude Desktop sends your prompt to the MCP server.
+- Application sends your prompt to the MCP server.
 - The MCP server translates your request to Airflow's REST API.
-- Results are returned conversationally in Claude Desktop.
+- Results are returned conversationally in requested application.
 
 ---
 
@@ -136,7 +172,7 @@ Claude Desktop will send your requests to the MCP server, which translates them 
 
 ## 📝 Troubleshooting
 
-- **Claude Desktop can't find MCP tools:** Ensure the MCP server is running and correctly configured.
+- **Can't find MCP tools:** Ensure the MCP server is running and correctly configured.
 - **Authentication errors:** Check your Airflow credentials in the `.env` file.
 - **Docker issues:** Use `docker logs` to view error messages.
 

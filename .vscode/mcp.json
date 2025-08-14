@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "airflow-custom-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "airflow-custom-mcp"
+      ]
+    }
+  }
+}
