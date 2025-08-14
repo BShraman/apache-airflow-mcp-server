@@ -9,6 +9,7 @@ The **Apache Airflow MCP Server** enables users to orchestrate and manage Airflo
 - **Natural Language Workflow Orchestration:** Control and query Airflow using plain English.
 - **Containerized Architecture:** All components run in Docker for portability and reproducibility.
 - **Claude Desktop Integration:** Seamless communication between MCP server and Claude Desktop.
+- **Visual Code Studio:** Seamless communication between MCP server and Visual Code Studio.
 - **Auto-Discovery of Tools:** Registered Airflow tools are automatically available in Claude Desktop.
 - **Easy Setup:** Minimal prerequisites and simple configuration.
 
