@@ -219,5 +219,54 @@ class AirflowDAGs:
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         return results
+    
+    async def delete_dags_runs(self, dag_id:str , dag_run_id: str):
+        """
+        Delete a specific DAG run by its DAG ID and DAG run ID.
 
+        Sends a DELETE request to the `/dags/{dag_id}/dagRuns/{dag_run_id}` endpoint.
+
+        Args:
+            dag_id (str): The identifier of the DAG.
+            dag_run_id (str): The identifier of the DAG run to delete.
+
+        Returns:
+            dict or str: The response from Airflow API if successful;
+                         otherwise, an error message string.
+        """
+        
+        endpoint = f"dags/{dag_id}/dagRuns/{dag_run_id}"
+        method = 'delete'
+
+        response = await self.client.api_request(endpoint, method)
+
+        if isinstance(response, str):
+            return response 
+
+        return response
+
+
+    async def get_dag_version(self, dag_id: str):
+        """
+        Fetch all versions for a specific DAG.
+
+        Sends a GET request to the `/dags/{dag_id}/dagVersions` endpoint to retrieve
+        all versions associated with the specified DAG.
+
+        Args:
+            dag_id (str): The identifier of the DAG.
+
+        Returns:
+            list: A list of dictionaries containing details of each DAG version.
+                  If an error occurs, a string error message is returned.
+        """
+        endpoint = f"dags/{dag_id}/dagVersions"
+        method = 'get'
+
+        response = await self.client.api_request(endpoint, method)
+
+        if isinstance(response, str):
+            return response
+
+        return response.get("dag_versions", [])
 

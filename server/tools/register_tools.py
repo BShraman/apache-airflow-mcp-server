@@ -6,6 +6,7 @@ class RegisterTools:
         from tools.assets import AirflowAssets
         from tools.connections import AirflowConnection
         from tools.tasks_instance import AirflowTasksInstance
+        from tools.pool import AirflowPool
 
         self.client = AirflowClient()
         self.dags = AirflowDAGs(self.client)
@@ -13,6 +14,7 @@ class RegisterTools:
         self.assets = AirflowAssets(self.client)
         self.connection = AirflowConnection(self.client)
         self.tasks_instance = AirflowTasksInstance(self.client)
+        self.pools = AirflowPool(self.client)
 
         self.mcp = mcp
 
@@ -53,7 +55,22 @@ class RegisterTools:
             """Pauses all DAGs in Airflow (see tools.pause_all_dags for details)."""
             return await self.dags.pause_all_dags(pause=True)
         
-    #-------------------------------- Tasks Registration ----------------------------------#
+        # @self.mcp.tool("unpause_all_dags")
+        # async def unpause_all_dags():
+        #     """Unpauses all DAGs in Airflow (see tools.unpause_all_dags for details)."""
+        #     return await self.dags.pause_all_dags(pause=False)
+        
+        @self.mcp.tool("delete_dags_runs")
+        async def delete_dags_runs(dag_id: str, dag_run_id:str):
+            """Deletes all runs for a specific DAG (see tools.delete_dags_runs for details)."""
+            return await self.dags.delete_dags_runs(dag_id,dag_run_id)
+        
+        @self.mcp.tool("get_dag_version")
+        async def get_dag_version(dag_id: str):
+            """Get the version of a specific DAG (see tools.get_dag_version for details)."""
+            return await self.dags.get_dag_version(dag_id)
+        
+    #-------------------------------- Tasks Registration --------------------------------------#
     def _tasks_instance(self):
         @self.mcp.tool("get_task_instance")
         async def get_task_instance(dag_id: str,run_id: str):
@@ -87,12 +104,82 @@ class RegisterTools:
                 dag_id, from_date, to_date, run_backwards, reprocess_behavior, max_active_runs, dag_run_conf
             )
         
-    #-------------------------------- Assets Registration ----------------------------------#
+        @self.mcp.tool("get_backfill")
+        async def get_backfill(backfill_id: int):
+            """Get details of a specific backfill (see tools.get_backfill for details)."""
+            return await self.backfills.get_backfill(backfill_id)
+        
+        @self.mcp.tool("pause_backfill")
+        async def pause_backfill(backfill_id: int):
+            """Pause a specific backfill (see tools.pause_backfill for details)."""
+            return await self.backfills.pause_backfill(backfill_id)
+        
+        @self.mcp.tool("unpause_backfill")
+        async def unpause_backfill(backfill_id: int):
+            """Unpause a specific backfill (see tools.unpause_backfill for details)."""
+            return await self.backfills.unpause_backfill(backfill_id)
+        
+        @self.mcp.tool("cancel_backfill")
+        async def cancel_backfill(backfill_id: int):
+            """Cancel a specific backfill (see tools.cancel_backfill for details)."""
+            return await self.backfills.cancel_backfill(backfill_id)
+        
+        @self.mcp.tool("backfill_dry_runs")
+        async def backfill_dry_runs(
+            dag_id: str,
+            from_date: str,
+            to_date: str,
+            run_backwards: bool = False,
+            reprocess_behavior: str = "none",
+            max_active_runs: int = 10,
+            dag_run_conf: dict = {},
+            ):
+            """Simulates a backfill for a specific DAG without executing tasks (see tools.backfill_dry_runs for details)."""
+            return await self.backfills.backfill_dry_runs(
+                dag_id, from_date, to_date, run_backwards, reprocess_behavior, max_active_runs, dag_run_conf
+            )
+        
+    #-------------------------------- Assets Registration -------------------------------------#
     def _assets(self):
         @self.mcp.tool("get_assets")
         async def get_assets():
             """Fetch all Airflow assets (see tools.get_assets for details)."""
             return await self.assets.get_assets()
+        
+        @self.mcp.tool("get_asset_aliases")
+        async def get_asset_aliases():
+            """Fetch all Airflow asset aliases (see tools.get_asset_aliases for details)."""
+            return await self.assets.get_asset_aliases()
+        
+        @self.mcp.tool("get_asset_events")
+        async def get_asset_events():
+            """Fetch all Airflow asset events (see tools.get_asset_events for details)."""
+            return await self.assets.get_asset_events()
+        
+        @self.mcp.tool("create_asset_event")
+        async def create_asset_event(asset_id: int):
+            """Create an Airflow asset event (see tools.create_asset_event for details)."""
+            return await self.assets.create_asset_events(asset_id)
+        
+        @self.mcp.tool("get_asset_queued_events")
+        async def get_asset_queued_events(asset_id: int):
+            """Fetch queued events for a specific asset (see tools.get_asset_queued_events for details)."""
+            return await self.assets.get_asset_queued_events(asset_id)
+        
+        @self.mcp.tool("get_dag_asset_queued_events")
+        async def get_dag_asset_queued_events(dag_id: str):
+            """Fetch queued events for all assets associated with a specific DAG (see tools.get_dag_asset_queued_events for details)."""
+            return await self.assets.get_dag_asset_queued_events(dag_id)
+        
+        @self.mcp.tool("delete_asset_event")
+        async def delete_asset_event(event_id: int):
+            """Delete a specific asset event (see tools.delete_asset_event for details)."""
+            return await self.assets.delete_asset_event(event_id)
+        
+        @self.mcp.tool("delete_dag_asset_events")
+        async def delete_dag_asset_events(dag_id: str):
+            """Delete all asset events associated with a specific DAG (see tools.delete_dag_asset_events for details)."""
+            return await self.assets.delete_dag_asset_events(dag_id)
         
     #-------------------------------- Connection Registration ----------------------------------#
     def _connections(self):
@@ -120,4 +207,26 @@ class RegisterTools:
         async def delete_connection(conn_id: str):
             """Delete an Airflow connection (see tools.delete_connection for details)."""
             return await self.connection.delete_connection(conn_id)
+        
+    #-------------------------------- Pools Registration ----------------------------------#
+    def _pools(self):
+        @self.mcp.tool("get_pools")
+        async def get_pools():
+            """Fetch all Airflow pools (see tools.get_pools for details)."""
+            return await self.pools.get_pools()
+        
+        @self.mcp.tool("create_pool")
+        async def create_pool(name: str, slots: int, description: str = ""):
+            """Create a new Airflow pool (see tools.create_pool for details)."""
+            return await self.pools.create_pool(name, slots, description)
+        
+        @self.mcp.tool("update_pool")
+        async def update_pool(name: str, slots: int, description: str = ""):
+            """Update an existing Airflow pool (see tools.update_pool for details)."""
+            return await self.pools.update_pool(name, slots, description)
+        
+        @self.mcp.tool("delete_pool")
+        async def delete_pool(name: str):
+            """Delete an Airflow pool (see tools.delete_pool for details)."""
+            return await self.pools.delete_pool(name)
         

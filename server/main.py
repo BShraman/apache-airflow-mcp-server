@@ -15,6 +15,7 @@ RegisterTools(mcp)._backfills()
 RegisterTools(mcp)._assets()
 RegisterTools(mcp)._connections()
 RegisterTools(mcp)._tasks_instance()
+RegisterTools(mcp)._pools()
 
 # ----------------- Run the server ----------------------------- #
 if __name__ == "__main__":
